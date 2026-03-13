@@ -57,22 +57,6 @@ typedef enum argstyle_t
     ARGSTYLE_ALIEN
 } argstyle_t;
 
-/// @brief ID's of engines known to the launcher.
-typedef enum engine_id_t
-{
-    /// @brief Vanilla-family engines.
-    ID_VANILLA,
-
-    /// @brief ZDoom-family engines.
-    ID_ZDOOM,
-
-    /// @brief Eternity-family engines.
-    ID_ETERNITY,
-
-    /// @brief Custom or unknown engines.
-    ID_ALIEN
-} engine_id_t;
-
 /// @brief Map launch styles.
 /// Determines how the launcher should instruct the engine to start a map.
 typedef enum map_launch_style_t
@@ -91,7 +75,7 @@ typedef enum map_launch_style_t
 typedef struct engine_spec_t
 {
     /// @brief ID of engine.
-    engine_id_t id;
+    char* id;
 
     /// @brief Display name of the engine.
     char *name;
@@ -140,7 +124,7 @@ typedef struct profile_t
     char *path;
 
     /// @brief Engine ID used for this profile.
-    engine_id_t engine_id;
+    char* engine_id;
 
     /// @brief Direct path to IWAD.
     /// May reference default IWAD or a custom one.
