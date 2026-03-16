@@ -3,13 +3,18 @@
 #include "data.h"
 
 int test(void) {
-    profile_t profile = lf_profile("testfiles/profile1.dmp");
-    if (profile.name == NULL) {
+    profile_t profile = lf_profile("testfiles/test.dmp");
+    engine_spec_t engine_spec = lf_engine_spec("testfiles/test.dme");
+
+    if (profile.name == NULL || engine_spec.name == NULL) {
         return -1;
     }
 
     printf("name of profile: %s\n", profile.name);
+    printf("name of engine: %s\n", engine_spec.name);
+
     free_profile(&profile);
+    free_engine_spec(&engine_spec);
     return 0;
 }
 

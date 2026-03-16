@@ -1,0 +1,14 @@
+id = "chocolate"
+name = "Chocolate Doom"
+path = "/usr/local/bin/chocolate-doom"
+
+argstyle = "vanilla"
+map_launch_style = "warp"
+
+iwad_support = true
+file_support = true
+deh_support = true
+skill_support = true
+merge_support = true
+response_files_support = false
+plus_commands_support = false

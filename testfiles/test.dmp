@@ -1,0 +1,28 @@
+name = "Full Modded Profile"
+engine_id = "gzdoom"
+
+iwad = "doom2.wad"
+
+mods = {
+    "eviternity.wad",
+    "beautifuldoom.pk3",
+    "smoothdoom.pk3"
+}
+
+deh = {
+    "patch1.deh",
+    "patch2.deh"
+}
+
+warp_map = "MAP01"
+
+skill = 4
+
+no_monsters = false
+fast_monsters = true
+monster_respawn = false
+
+extra = {
+    "+freelook 1",
+    "+cl_capfps 1"
+}
