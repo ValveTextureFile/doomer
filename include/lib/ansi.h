@@ -12,7 +12,7 @@
 
 #ifndef CONSOLE_H
 
-/**
+/**z
     Information on ANSI escape codes are available here:    https://gist.github.com/ConnerWill/d4b6c776b509add763e17f9f113fd25b
     See examples:                                           https://stackoverflow.com/a/54062826
     Truecolor:                                              https://en.wikipedia.org/wiki/Color_depth#True_color_.2824-bit.29

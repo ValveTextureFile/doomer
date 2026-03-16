@@ -3,13 +3,20 @@
 
 #include <confuse.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+#include "models.h"
 
 extern cfg_opt_t config_default_opts[];
 extern cfg_opt_t engine_spec_default_opts[];
 extern cfg_opt_t profile_default_opts[];
 
-bool init_config(cfg_t *cfg);
-bool init_profile(cfg_t *profile);
-bool init_engine_spec(cfg_t *engine_spec);
+profile_t lf_profile(const char *path);
+config_t lf_config(const char *path);
+engine_spec_t lf_engine_spec(const char *path);
+
+void free_profile(profile_t* profile);
+void free_config(config_t* config_t);
+void free_engine_spec(engine_spec_t* engine_spec);
 
 #endif

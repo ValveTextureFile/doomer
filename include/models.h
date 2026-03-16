@@ -5,7 +5,7 @@
 #include <stddef.h>
 
 /// @brief Typedef model for the config file.
-typedef struct config_model_t
+typedef struct config_t
 {
     /// @brief Default IWAD used if a profile does not specify one.
     char *default_iwad;
@@ -15,7 +15,7 @@ typedef struct config_model_t
 
     /// @brief Main folder that contains mods, iwads, profiles, and engines.
     char *root_folder;
-} config_model_t;
+} config_t;
 
 /// @brief Typedef model for launcher paths.
 /// These paths stem from the root folder and point to key directories.
@@ -75,7 +75,7 @@ typedef enum map_launch_style_t
 typedef struct engine_spec_t
 {
     /// @brief ID of engine.
-    char* id;
+    char *id;
 
     /// @brief Display name of the engine.
     char *name;
@@ -124,7 +124,7 @@ typedef struct profile_t
     char *path;
 
     /// @brief Engine ID used for this profile.
-    char* engine_id;
+    char *engine_id;
 
     /// @brief Direct path to IWAD.
     /// May reference default IWAD or a custom one.

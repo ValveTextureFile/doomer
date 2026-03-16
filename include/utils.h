@@ -12,7 +12,8 @@
 /// @brief Stylized error log.
 /// @param from Origin of error.
 /// @param message Error message.
-static void log_error(char *from, char *message) {
+static void log_error(char *from, char *message)
+{
     console_set_color(CONSOLE_FG_BRIGHT_RED);
     printf("\aerror: [%s] %s\n", from, message);
     console_reset_color();
@@ -21,7 +22,8 @@ static void log_error(char *from, char *message) {
 /// @brief Stylized log messaging.
 /// @param from Origin.
 /// @param message Message.
-static void log(char *from, char *message) {
+static void log(char *from, char *message)
+{
     printf("[%s] %s", from, message);
 }
 
@@ -29,9 +31,9 @@ static void log(char *from, char *message) {
 // #ifdef _WIN64   // Windows
 // static void alert(char* message) {
 //     MessageBox(
-//         NULL,                            
-//         message, 
-//         "doomer",         
+//         NULL,
+//         message,
+//         "doomer",
 //         MB_OK | MB_ICONINFORMATION
 //     );
 // }
@@ -47,5 +49,5 @@ static void log(char *from, char *message) {
 // }
 // #endif
 
-// 
+//
 #endif // UTILS_H
