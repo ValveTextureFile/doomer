@@ -1,8 +1,0 @@
-cc build/obj/src/main.o build/obj/src/args/builder.o build/obj/src/data.o vendor/confuse-3.3/src/.libs/libconfuse.a   vendor/confuse-3.3/src/.libs/libconfuse.a -o doomer
-ld: warning: ignoring duplicate libraries: 'vendor/confuse-3.3/src/.libs/libconfuse.a'
-Undefined symbols for architecture arm64:
-  "_lf_engine_spec", referenced from:
-      _test in main.o
-ld: symbol(s) not found for architecture arm64
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [doomer] Error 1
