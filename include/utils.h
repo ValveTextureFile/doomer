@@ -7,7 +7,25 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "lib/ansi.h"
+
+/// @brief Internal string copier.
+/// @param s String to copy.
+/// @return Copied string.
+static char *dstr(const char *s)
+{
+    if (!s)
+        return NULL;
+
+    size_t len = strlen(s);
+    char *copy = malloc(len + 1);
+    if (!copy)
+        return NULL;
+
+    memcpy(copy, s, len + 1);
+    return copy;
+}
 
 /// @brief Stylized error log.
 /// @param from Origin of error.
@@ -24,7 +42,7 @@ static void log_error(char *from, char *message)
 /// @param message Message.
 static void log(char *from, char *message)
 {
-    printf("[%s] %s", from, message);
+    printf("[%s] %s\n", from, message);
 }
 
 // NOTE: Something to comeback to later.
