@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <stdbool.h>
+#include "models.h"
 
 /// @brief Typedef builder type for building a passable argv.
 typedef struct builder_t
@@ -43,5 +44,13 @@ bool builder_push2(builder_t *builder, const char *flag, const char *value);
 /// @param builder The builder to pass.
 /// @return true on success, false on failure.
 bool builder_finalize(builder_t *builder);
+
+/// @brief Totalen builder.
+/// @param builder 
+/// @param config 
+/// @param profile 
+/// @param engine_spec 
+/// @return true on success, false on failure.e
+bool builder_total(builder_t *builder, const config_t *config, const profile_t *profile, const engine_spec_t *engine_spec);
 
 #endif

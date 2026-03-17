@@ -23,6 +23,6 @@ fast_monsters = true
 monster_respawn = false
 
 extra = {
-    "+freelook 1",
-    "+cl_capfps 1"
+    "+freelook", "1",
+    "+cl_capfps", "1"
 }

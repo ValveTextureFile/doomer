@@ -5,20 +5,23 @@
 
 int test(void)
 {
+    profile_t profile = lf_profile("testfiles/test.dmp");
+    engine_spec_t engine = lf_engine_spec("testfiles/test.dme");
+    config_t config = lf_config("testfiles/test.dconf");
+
     builder_t b;
     builder_init(&b);
 
-    builder_push(&b, "gzdoom");
-    builder_push2(&b, "-iwad", "doom2.wad");
-    builder_push(&b, "-file");
-    builder_push(&b, "sunlust.wad");
-    builder_push2(&b, "+map", "MAP01");
-    builder_finalize(&b);
+    if (!builder_total(&b, &config, &profile, &engine))
+    {
+        printf("build failed\n");
+        return 1;
+    }
 
-    for (size_t i=0;i<b.entries;i++)
+    for (size_t i = 0; i < b.entries; i++)
+    {
         printf("[%zu] %s\n", i, b.argv[i]);
-
-    builder_free(&b);
+    }
 }
 
 int main(int argc, char **argv)

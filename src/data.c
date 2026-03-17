@@ -288,15 +288,15 @@ engine_spec_t lf_engine_spec(const char *path)
         {
             engine_spec.map_launch_style = 0;
         }
-        else if (strcmp(map_launch_style, "none"))
+        else if (strcmp(map_launch_style, "none") == 0)
         {
             engine_spec.map_launch_style = MAP_LAUNCH_NONE;
         }
-        else if (strcmp(map_launch_style, "warp"))
+        else if (strcmp(map_launch_style, "warp") == 0)
         {
             engine_spec.map_launch_style = MAP_LAUNCH_WARP;
         }
-        else if (strcmp(map_launch_style, "map") || strcmp(map_launch_style, "plusmap"))
+        else if (strcmp(map_launch_style, "map") == 0 || strcmp(map_launch_style, "plusmap") == 0)
         {
             engine_spec.map_launch_style = MAP_LAUNCH_PLUS_MAP;
         }

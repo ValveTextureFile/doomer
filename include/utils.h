@@ -33,7 +33,7 @@ static char *dstr(const char *s)
 static void log_error(char *from, char *message)
 {
     console_set_color(CONSOLE_FG_BRIGHT_RED);
-    printf("\aerror: [%s] %s\n", from, message);
+    fprintf(stderr, "\aerror: [%s] %s\n", from, message);
     console_reset_color();
 }
 

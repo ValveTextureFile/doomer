@@ -4,6 +4,20 @@
 
 #include <stdlib.h>
 
+static const char *resolve_iwad(const profile_t *profile, const config_t *config)
+{
+    if (profile && profile->iwad && profile->iwad[0] != '\0')
+    {
+        return profile->iwad;
+    }
+    if (config && config->default_iwad && config->default_iwad[0] != '\0')
+    {
+        return config->default_iwad;
+    }
+
+    return NULL;
+}
+
 static bool argv_builder_grow(builder_t *builder, size_t needed_extra)
 {
     if (!builder)
@@ -113,4 +127,114 @@ bool builder_finalize(builder_t *builder)
 
     builder->argv[builder->entries] = NULL;
     return true;
+}
+
+bool builder_total(builder_t *builder, const config_t *config, const profile_t *profile, const engine_spec_t *engine_spec)
+{
+    if (!builder || !profile || !engine_spec)
+        return false;
+
+    if (!builder_init(builder))
+        return false;
+
+    if (!builder_push(builder, engine_spec->exe_path))
+        goto fail;
+
+    const char *iwad = resolve_iwad(profile, config);
+    if (iwad && engine_spec->supports_iwad)
+    {
+        if (!builder_push2(builder, "-iwad", iwad))
+            goto fail;
+    }
+
+    if (engine_spec->supports_file && profile->mod_count > 0)
+    {
+        if (!builder_push(builder, "-file"))
+            goto fail;
+
+        for (size_t i = 0; i < profile->mod_count; i++)
+        {
+            if (!builder_push(builder, profile->mods[i]))
+                goto fail;
+        }
+    }
+
+    if (engine_spec->supports_deh && profile->deh_count > 0)
+    {
+        if (!builder_push(builder, "-deh"))
+            goto fail;
+
+        for (size_t i = 0; i < profile->deh_count; i++)
+        {
+            if (!builder_push(builder, profile->deh_files[i]))
+                goto fail;
+        }
+    }
+
+    if (profile->warp_map && profile->warp_map[0] != '\0')
+    {
+        switch (engine_spec->map_launch_style)
+        {
+        case MAP_LAUNCH_WARP:
+            if (!builder_push2(builder, "-warp", profile->warp_map))
+                goto fail;
+            break;
+
+        case MAP_LAUNCH_PLUS_MAP:
+            if (!builder_push2(builder, "+map", profile->warp_map))
+                goto fail;
+            break;
+
+        case MAP_LAUNCH_NONE:
+        default:
+            break;
+        }
+    }
+
+    if (engine_spec->supports_skill)
+    {
+        char skillbuf[16];
+        snprintf(skillbuf, sizeof(skillbuf), "%d", profile->skill);
+
+        if (!builder_push2(builder, "-skill", skillbuf))
+            goto fail;
+    }
+
+    if (profile->no_monsters)
+    {
+        if (!builder_push(builder, "-nomonsters"))
+            goto fail;
+    }
+
+    if (profile->fast)
+    {
+        if (!builder_push(builder, "-fast"))
+            goto fail;
+    }
+
+    if (profile->respawn)
+    {
+        if (!builder_push(builder, "-respawn"))
+            goto fail;
+    }
+
+    for (size_t i = 0; i < profile->extra_arg_count; i++)
+    {
+        const char *arg = profile->extra_args[i];
+
+        if (!engine_spec->supports_plus_commands && arg[0] != '\0' && arg[0] == '+')
+            continue;
+
+        if (!builder_push(builder, arg))
+            goto fail;
+    }
+
+    if (!builder_finalize(builder))
+        goto fail;
+
+    return true;
+
+fail:
+    builder_free(builder);
+    return false;
 }
